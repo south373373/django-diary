@@ -1,0 +1,50 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+        <h1>日記一覧</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>タイトル</th>
+                    <th>日付</th>
+                    <th>詳細</th>
+                    <th>更新</th>
+                    <th>削除</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for day in day_list %}
+                <tr>
+                    <td>{{ day.title }}</td>
+                    <td>{{ day.date }}</td>
+                    <!-- 
+                        以下の様に作成する事も可能。models.pyの部分に記載した
+                        djangoが自動的に作成するIDを使用した記載例。
+                    <td><a href="{% url 'update' day.id %}">更新</a></td>
+                     -->
+                    <td><a href="{% url 'detail' day.pk %}">詳 細</a></td>
+                    <td><a href="{% url 'update' day.pk %}">更 新</a></td>
+                    <td><a href="{% url 'delete' day.pk %}">削 除</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- ページネイションの設定 
+            直接記載する設定方法 
+        {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}">前へ</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}">次へ</a>
+        {% endif %}
+        -->
+
+        <!-- ページネイションの設定 
+            別ページで作成したページネーションのHTMLファイルを
+            読み込む設定方法 
+        
+        {% include 'diary/page1.html' %}
+        -->
+        {% include 'diary/page2.html' %}
+{% endblock content %}

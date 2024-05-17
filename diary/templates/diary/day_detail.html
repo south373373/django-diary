@@ -1,0 +1,24 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+    <table class="table">
+        <tr>
+            <th>タイトル</th>
+            <td>{{day.title}}</td>
+        </tr>
+        <tr>
+            <th>本文</th>
+            <!--
+                linebreaksbrとは 改行コードをbrタグに
+                置き換えてくれる表示で、大量の文字数で
+                改行していた場合に正常に改行表示する機能。
+            -->
+            <td>{{day.text | linebreaksbr }}</td>
+        </tr>
+        <tr>
+            <th>日付</th>
+            <td>{{day.date}}</td>
+        </tr>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'index' %}'">戻 る</button>
+{% endblock content %}
